@@ -5,6 +5,9 @@ services:
     volumes: &appvolumes
       - ./src/nginx.conf.sample:/var/www/html/nginx.conf:cached
       - ./src:/var/www/html:cached
+    extra_hosts: &appextrahosts
+      - "host.docker.internal:host-gateway"
 
   phpfpm:
     volumes: *appvolumes
+    extra_hosts: *appextrahosts
