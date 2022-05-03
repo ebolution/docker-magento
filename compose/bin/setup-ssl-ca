@@ -49,19 +49,11 @@ else
   certfile="rootCA.pem"
   certname="Root CA"
 
-  ### For cert8 (legacy - DBM)
-  find ~/ -name "cert8.db" -print0 | while read -r certDB
-  do
-      certdir=$(dirname "${certDB}");
-      certutil -D -n "${certname}" -i ${certfile} -d dbm:"${certdir}"
-      certutil -A -n "${certname}" -t "TCu,Cu,Tu" -i ${certfile} -d dbm:"${certdir}"
-  done
-
   ### For cert9 (SQL)
-  find ~/ -name "cert9.db" -print0 | while read -r certDB
+  sudo find ~/ -name "cert9.db" | while read -r certDB
   do
       certdir=$(dirname "${certDB}");
-      certutil -D -n "${certname}" -i ${certfile} -d sql:"${certdir}"
+      certutil -D -n "${certname}" -i ${certfile} -d sql:"${certdir}" || true
       certutil -A -n "${certname}" -t "TCu,Cu,Tu" -i ${certfile} -d sql:"${certdir}"
   done
 
