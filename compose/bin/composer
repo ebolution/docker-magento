@@ -1,2 +1,2 @@
 #!/bin/bash
-bin/cli php composer.phar "$@"
+bin/cli composer "$@"
